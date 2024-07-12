@@ -18,8 +18,9 @@ body {
   color: #111;
   cursor: pointer;
   display: flex;
-  font-family: Inter,sans-serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 16px;
+  font-weight:bolder;
   height: 48px;
   justify-content: center;
   line-height: 24px;
@@ -31,6 +32,7 @@ body {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin-left: 32px;
 }
 
 .button-56:after {
