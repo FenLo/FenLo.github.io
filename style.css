@@ -1,50 +1,11 @@
 body {
-  background: linear-gradient(#fae8e7,#ffd0cd) no-repeat;
+background: linear-gradient(#fae8e7,#ffd0cd) no-repeat;
  margin: 0;
  padding: 0;
  min-height: 100vh;
  width: 100%;
 }
 
-#header{
-  width: 30%;
-  background-color: #fee6e3;
-  border: 2px solid #000; 
-  border-radius: 12px;
-  height: 50px;
-  margin: 20px;
-  position: fixed; /* Elemanı sabit konumda tut */
-  top: 0; /* Üst kenardan 0px uzaklıkta */
-  left: 50%; /* Sol kenardan %50 uzaklıkta */
-  transform: translateX(-50%); /* Kendi genişliğinin yarısı kadar sola kaydır */
-}
-
-#header ul {
-  list-style-type: none; /* Liste işaretlerini kaldır */
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Taşma durumunda içeriği gizle */
-}
-
-
-
-
-#item1{
-  float: right;
-
-}
-
-#item2{
-  float: left;
-
-}
-
-#header li a {
-  display: block; /* Bağlantıları blok seviyesinde göster */
-  text-align: center; /* Metni ortala */
-  padding: 14px 16px; /* İç boşluk */
-  text-decoration: none; /* Alt çizgiyi kaldır */
-}
 
 #container {
   display: flex;
