@@ -10,8 +10,18 @@
 }
 
 #baslik {
-  margin-bottom: 0px; /* Bu değeri ihtiyacınıza göre ayarlayın */
+  margin-bottom: 0px;
+
 }
+
+#omer {
+    border: 2px solid #000; /* 2px kalınlığında, katı ve siyah bir border */
+    border-radius: 12px;
+    text-align: center;
+    padding: 8px;
+    background-color: #fee6e3;
+}
+
 
 .button-56 {
   align-items: center;
