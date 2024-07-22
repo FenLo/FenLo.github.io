@@ -1,61 +1,93 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #ffe6e6, #ffcccc);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+background: linear-gradient(#fae8e7,#ffd0cd) no-repeat;
+ margin: 0;
+ padding: 0;
+ min-height: 100vh;
+ width: 100%;
 }
 
-.container {
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#baslik {
+  margin-bottom: 0px;
+
+}
+
+#omer {
+    border: 2px solid #000; /* 2px kalınlığında, katı ve siyah bir border */
+    border-radius: 12px;
     text-align: center;
-    margin-bottom: 20px;
+    padding: 8px;
+    background-color: #fee6e3;
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 0.5em;
+
+.button-56 {
+  align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  font-weight:bolder;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
 }
 
-h2 {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
 }
 
-p {
-    font-size: 1.2em;
-    margin-bottom: 1em;
+.button-56:hover:after {
+  transform: translate(0, 0);
 }
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.button-56:active {
+  background-color: #fccdc8;
+  outline: 0;
 }
 
-.button {
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 5px;
-    color: black;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+.button-56:hover {
+  outline: 0;
 }
 
-.button:hover {
-    background-color: #f2f2f2;
-}
-
-section {
-    text-align: center;
-    margin: 40px 0;
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
 }
