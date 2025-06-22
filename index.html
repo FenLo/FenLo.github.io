@@ -1,25 +1,888 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ömer Vigorous</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <title>Güvenli Password Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 900px;
+            min-height: 600px;
+        }
+
+        .login-screen {
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+            margin-top: 15px;
+        }
+
+        .btn-file {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            margin-top: 10px;
+            font-size: 14px;
+            padding: 10px 15px;
+        }
+
+        .main-screen {
+            display: none;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn-header {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .export-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .export-btn:hover {
+            background: #45a049;
+        }
+
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .logout-btn:hover {
+            background: #ff5252;
+        }
+
+        .add-password-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .password-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .password-form .form-group:last-child {
+            grid-column: 1 / -1;
+        }
+
+        .passwords-list {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .passwords-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+        }
+
+        .password-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+        }
+
+        .password-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .password-item:last-child {
+            border-bottom: none;
+        }
+
+        .password-info {
+            flex: 1;
+        }
+
+        .site-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .username {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .password-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background: #45a049;
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #da190b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .password-strength {
+            margin-top: 10px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .strength-text {
+            font-size: 12px;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .generate-btn {
+            background: #9c27b0;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .generate-btn:hover {
+            background: #7b1fa2;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-info {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #1976d2;
+        }
+
+        .encryption-info {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #7b1fa2;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .password-form {
+                grid-template-columns: 1fr;
+            }
+
+            .password-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .password-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Giriş Ekranı -->
+        <div id="loginScreen" class="login-screen">
+            <div class="logo">🔐</div>
+            <h1>Güvenli Password Manager</h1>
+            
+            <div class="encryption-info">
+                🔒 Tüm verileriniz AES-256 şifreleme ile korunur
+            </div>
 
-    <div id="container">
-        <div id="baslikl">
-            <h1 id="omer">Ömer Vigorous</h1>
+            <div id="setupForm" style="display: none;">
+                <div class="form-group">
+                    <label for="setupPassword">Ana Şifrenizi Oluşturun</label>
+                    <input type="password" id="setupPassword" placeholder="Güçlü bir ana şifre girin (min 8 karakter)">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Ana Şifreyi Onaylayın</label>
+                    <input type="password" id="confirmPassword" placeholder="Ana şifreyi tekrar girin">
+                </div>
+                <button class="btn" onclick="setupMasterPassword()">Ana Şifreyi Oluştur</button>
+            </div>
+
+            <div id="loginForm">
+                <div class="form-group">
+                    <label for="masterPassword">Ana Şifre</label>
+                    <input type="password" id="masterPassword" placeholder="Ana şifrenizi girin">
+                </div>
+                <button class="btn" onclick="login()">Giriş Yap</button>
+                
+                <div class="form-group">
+                    <label for="importFile">Yedek Dosyasından Geri Yükle</label>
+                    <input type="file" id="importFile" class="file-input" accept=".pwm" onchange="importFromFile()">
+                    <button class="btn btn-file" onclick="document.getElementById('importFile').click()">
+                        📁 Yedek Dosyası Seç
+                    </button>
+                </div>
+            </div>
         </div>
-        
-        <div id="baslik2">
-            <button class="button-56" role="button">Yakında</button>
+
+        <!-- Ana Ekran -->
+        <div id="mainScreen" class="main-screen">
+            <div class="header">
+                <div class="user-info">
+                    <div class="avatar">👤</div>
+                    <div>
+                        <h2>Hoş Geldiniz</h2>
+                        <p>Şifreleriniz güvenle şifrelendi</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn-header export-btn" onclick="exportToFile()">📥 Yedek Al</button>
+                    <button class="action-btn-header logout-btn" onclick="logout()">Çıkış Yap</button>
+                </div>
+            </div>
+
+            <div class="add-password-section">
+                <h3>Yeni Şifre Ekle</h3>
+                <form class="password-form" onsubmit="addPassword(event)">
+                    <div class="form-group">
+                        <label for="siteName">Site/Uygulama Adı</label>
+                        <input type="text" id="siteName" required placeholder="Örn: Google, Facebook">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Kullanıcı Adı/E-posta</label>
+                        <input type="text" id="username" required placeholder="kullanici@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Şifre</label>
+                        <input type="password" id="password" required placeholder="Güçlü bir şifre girin">
+                        <button type="button" class="generate-btn" onclick="generatePassword()">Güçlü Şifre Oluştur</button>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthFill"></div>
+                            </div>
+                            <div class="strength-text" id="strengthText"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn">Şifre Ekle</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="passwords-list">
+                <div class="passwords-header">
+                    <h3>Kayıtlı Şifreler (<span id="passwordCount">0</span>)</h3>
+                </div>
+                <div id="passwordsList">
+                    <div class="empty-state">
+                        <div class="icon">🔒</div>
+                        <p>Henüz kayıtlı şifre yok</p>
+                        <p>Yukarıdaki formu kullanarak ilk şifrenizi ekleyin</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>    
-    
-</body>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        let passwords = [];
+        let masterPassword = '';
+        let currentSalt = '';
+
+        // Basit AES şifreleme fonksiyonları (Web Crypto API ile)
+        async function deriveKey(password, salt) {
+            const encoder = new TextEncoder();
+            const keyMaterial = await crypto.subtle.importKey(
+                'raw',
+                encoder.encode(password),
+                { name: 'PBKDF2' },
+                false,
+                ['deriveKey']
+            );
+            
+            return crypto.subtle.deriveKey(
+                {
+                    name: 'PBKDF2',
+                    salt: encoder.encode(salt),
+                    iterations: 100000,
+                    hash: 'SHA-256'
+                },
+                keyMaterial,
+                { name: 'AES-GCM', length: 256 },
+                false,
+                ['encrypt', 'decrypt']
+            );
+        }
+
+        async function encryptData(data, password) {
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await deriveKey(password, salt);
+            
+            const encoder = new TextEncoder();
+            const encrypted = await crypto.subtle.encrypt(
+                {
+                    name: 'AES-GCM',
+                    iv: iv
+                },
+                key,
+                encoder.encode(data)
+            );
+            
+            return {
+                salt: Array.from(salt),
+                iv: Array.from(iv),
+                data: Array.from(new Uint8Array(encrypted))
+            };
+        }
+
+        async function decryptData(encryptedObj, password) {
+            const salt = new Uint8Array(encryptedObj.salt);
+            const iv = new Uint8Array(encryptedObj.iv);
+            const data = new Uint8Array(encryptedObj.data);
+            
+            const key = await deriveKey(password, salt);
+            
+            try {
+                const decrypted = await crypto.subtle.decrypt(
+                    {
+                        name: 'AES-GCM',
+                        iv: iv
+                    },
+                    key,
+                    data
+                );
+                
+                const decoder = new TextDecoder();
+                return decoder.decode(decrypted);
+            } catch (e) {
+                throw new Error('Şifre çözme hatası - Yanlış şifre');
+            }
+        }
+
+        // Ana şifre hash'i oluşturma
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash));
+        }
+
+        // Uygulama başlatma
+        window.onload = function() {
+            checkForExistingData();
+        };
+
+        function checkForExistingData() {
+            // Varsayılan olarak kurulum formunu göster
+            document.getElementById('setupForm').style.display = 'block';
+            document.getElementById('loginForm').style.display = 'none';
+        }
+
+        // Ana şifre oluşturma
+        async function setupMasterPassword() {
+            const password = document.getElementById('setupPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+
+            if (password.length < 8) {
+                showToast('Ana şifre en az 8 karakter olmalıdır!', 'error');
+                return;
+            }
+
+            if (password !== confirm) {
+                showToast('Şifreler eşleşmiyor!', 'error');
+                return;
+            }
+
+            try {
+                const hashedPassword = await hashPassword(password);
+                const dataToSave = {
+                    masterPasswordHash: hashedPassword,
+                    passwords: [],
+                    salt: Array.from(crypto.getRandomValues(new Uint8Array(16)))
+                };
+
+                const encrypted = await encryptData(JSON.stringify(dataToSave), password);
+                downloadFile('passwords.pwm', JSON.stringify(encrypted));
+                
+                showToast('Ana şifre oluşturuldu! Dosya indirildi.', 'success');
+                
+                document.getElementById('setupForm').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('setupPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+                
+            } catch (error) {
+                showToast('Şifreleme hatası: ' + error.message, 'error');
+            }
+        }
+
+        // Dosyadan içe aktarma
+        async function importFromFile() {
+            const file = document.getElementById('importFile').files[0];
+            if (!file) return;
+
+            try {
+                const text = await file.text();
+                const encryptedData = JSON.parse(text);
+                
+                // Dosya formatını kontrol et
+                if (!encryptedData.salt || !encryptedData.iv || !encryptedData.data) {
+                    throw new Error('Geçersiz dosya formatı');
+                }
+
+                // Şifre isteme
+                const password = prompt('Ana şifrenizi girin:');
+                if (!password) return;
+
+                const decryptedData = await decryptData(encryptedData, password);
+                const data = JSON.parse(decryptedData);
+                
+                // Şifre doğrulama
+                const enteredHash = await hashPassword(password);
+                const storedHash = data.masterPasswordHash;
+                
+                if (JSON.stringify(enteredHash) !== JSON.stringify(storedHash)) {
+                    throw new Error('Yanlış ana şifre');
+                }
+
+                masterPassword = password;
+                passwords = data.passwords || [];
+                currentSalt = data.salt;
+                
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainScreen').style.display = 'block';
+                renderPasswords();
+                
+                showToast('Veriler başarıyla yüklendi!', 'success');
+                
+            } catch (error) {
+                showToast('Dosya yükleme hatası: ' + error.message, 'error');
+            }
+        }
+
+        // Giriş yapma (sadece import için)
+        function login() {
+            showToast('Lütfen yedek dosyanızı seçin', 'error');
+        }
+
+        // Çıkış yapma
+        function logout() {
+            masterPassword = '';
+            passwords = [];
+            currentSalt = '';
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('mainScreen').style.display = 'none';
+            document.getElementById('setupForm').style.display = 'block';
+            document.getElementById('loginForm').style.display = 'none';
+        }
+
+        // Dosyaya dışa aktarma
+        async function exportToFile() {
+            try {
+                const hashedPassword = await hashPassword(masterPassword);
+                const dataToSave = {
+                    masterPasswordHash: hashedPassword,
+                    passwords: passwords,
+                    salt: currentSalt
+                };
+
+                const encrypted = await encryptData(JSON.stringify(dataToSave), masterPassword);
+                const timestamp = new Date().toISOString().slice(0, 10);
+                downloadFile(`passwords_backup_${timestamp}.pwm`, JSON.stringify(encrypted));
+                
+                showToast('Yedek dosya indirildi!', 'success');
+                
+            } catch (error) {
+                showToast('Dışa aktarma hatası: ' + error.message, 'error');
+            }
+        }
+
+        // Dosya indirme
+        function downloadFile(filename, content) {
+            const blob = new Blob([content], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Şifre ekleme
+        async function addPassword(event) {
+            event.preventDefault();
+            
+            const siteName = document.getElementById('siteName').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const newPassword = {
+                id: Date.now(),
+                siteName: siteName,
+                username: username,
+                password: password
+            };
+
+            passwords.push(newPassword);
+            await savePasswords();
+            renderPasswords();
+            
+            // Formu temizle
+            document.getElementById('siteName').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('strengthFill').style.width = '0%';
+            document.getElementById('strengthText').textContent = '';
+
+            showToast('Şifre eklendi ve otomatik yedeklendi!', 'success');
+        }
+
+        // Şifreleri kaydetme
+        async function savePasswords() {
+            try {
+                const hashedPassword = await hashPassword(masterPassword);
+                const dataToSave = {
+                    masterPasswordHash: hashedPassword,
+                    passwords: passwords,
+                    salt: currentSalt
+                };
+
+                const encrypted = await encryptData(JSON.stringify(dataToSave), masterPassword);
+                downloadFile('passwords.pwm', JSON.stringify(encrypted));
+                
+            } catch (error) {
+                showToast('Kaydetme hatası: ' + error.message, 'error');
+            }
+        }
+
+        // Şifreleri görüntüleme
+        function renderPasswords() {
+            const passwordsList = document.getElementById('passwordsList');
+            const passwordCount = document.getElementById('passwordCount');
+            
+            passwordCount.textContent = passwords.length;
+
+            if (passwords.length === 0) {
+                passwordsList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🔒</div>
+                        <p>Henüz kayıtlı şifre yok</p>
+                        <p>Yukarıdaki formu kullanarak ilk şifrenizi ekleyin</p>
+                    </div>
+                `;
+                return;
+            }
+
+            passwordsList.innerHTML = passwords.map(pwd => `
+                <div class="password-item">
+                    <div class="password-info">
+                        <div class="site-name">${pwd.siteName}</div>
+                        <div class="username">${pwd.username}</div>
+                    </div>
+                    <div class="password-actions">
+                        <button class="action-btn copy-btn" onclick="copyPassword('${pwd.password}')">Kopyala</button>
+                        <button class="action-btn delete-btn" onclick="deletePassword(${pwd.id})">Sil</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Şifre kopyalama
+        function copyPassword(password) {
+            navigator.clipboard.writeText(password).then(() => {
+                showToast('Şifre kopyalandı!', 'success');
+            });
+        }
+
+        // Şifre silme
+        async function deletePassword(id) {
+            if (confirm('Bu şifreyi silmek istediğinizden emin misiniz?')) {
+                passwords = passwords.filter(pwd => pwd.id !== id);
+                await savePasswords();
+                renderPasswords();
+                showToast('Şifre silindi ve yedek güncellendi!', 'success');
+            }
+        }
+
+        // Güçlü şifre oluşturma
+        function generatePassword() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            let password = '';
+            for (let i = 0; i < 16; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('password').value = password;
+            checkPasswordStrength(password);
+        }
+
+        // Şifre gücünü kontrol etme
+        document.getElementById('password').addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+        });
+
+        function checkPasswordStrength(password) {
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            let text = '';
+            let color = '';
+
+            if (password.length >= 8) strength += 20;
+            if (password.length >= 12) strength += 20;
+            if (/[a-z]/.test(password)) strength += 20;
+            if (/[A-Z]/.test(password)) strength += 20;
+            if (/[0-9]/.test(password)) strength += 20;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 20;
+
+            if (strength <= 40) {
+                text = 'Çok Zayıf';
+                color = '#f44336';
+            } else if (strength <= 60) {
+                text = 'Zayıf';
+                color = '#ff9800';
+            } else if (strength <= 80) {
+                text = 'Orta';
+                color = '#2196f3';
+            } else if (strength <= 100) {
+                text = 'Güçlü';
+                color = '#4caf50';
+            } else {
+                text = 'Çok Güçlü';
+                color = '#2e7d32';
+            }
+
+            strengthFill.style.width = Math.min(strength, 100) + '%';
+            strengthFill.style.backgroundColor = color;
+            strengthText.textContent = text;
+            strengthText.style.color = color;
+        }
+
+        // Toast mesajı gösterme
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
+            toast.style.display = 'block';
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 4000);
+        }
+
+        // Enter tuşu ile form gönderme
+        document.getElementById('setupPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('confirmPassword').focus();
+            }
+        });
+
+        document.getElementById('confirmPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                setupMasterPassword();
+            }
+        });
+    </script>
 </body>
 </html>
