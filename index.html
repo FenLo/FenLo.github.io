@@ -452,8 +452,19 @@
             transition: border-color 0.3s ease;
         }
 
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
         }
@@ -718,23 +729,37 @@
                 
                 <div class="contact-form">
                     <h3 style="margin-bottom: 2rem; color: #667eea;">Mesaj Gönder</h3>
-                    <form>
+                    <form action="https://formspree.io/f/omervigorous@gmail.com" method="POST">
                         <div class="form-group">
                             <label for="name">Ad Soyad</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">E-posta</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="_replyto" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">Telefon</label>
                             <input type="tel" id="phone" name="phone">
                         </div>
                         <div class="form-group">
-                            <label for="message">Mesajınız</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="subject">Konu</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Konu Seçin</option>
+                                <option value="Özel Ders Talebi">Özel Ders Talebi</option>
+                                <option value="Sınav Hazırlığı">Sınav Hazırlığı</option>
+                                <option value="Konuşma Pratiği">Konuşma Pratiği</option>
+                                <option value="İş İngilizcesi">İş İngilizcesi</option>
+                                <option value="Çocuk İngilizcesi">Çocuk İngilizcesi</option>
+                                <option value="Genel Bilgi">Genel Bilgi</option>
+                            </select>
                         </div>
+                        <div class="form-group">
+                            <label for="message">Mesajınız</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Lütfen ihtiyacınızı, seviyenizi ve tercih ettiğiniz ders saatlerini belirtin..." required></textarea>
+                        </div>
+                        <input type="hidden" name="_subject" value="Yeni Özel Ders Talebi - Web Sitesi">
+                        <input type="hidden" name="_next" value="https://omerfarukdinc.com/tesekkur">
                         <button type="submit" class="submit-btn">Mesaj Gönder</button>
                     </form>
                 </div>
@@ -804,29 +829,8 @@
             });
         }
 
-        // Form submission
-        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const phone = formData.get('phone');
-            const message = formData.get('message');
-            
-            // Simple validation
-            if (!name || !email || !message) {
-                alert('Lütfen tüm gerekli alanları doldurun.');
-                return;
-            }
-            
-            // Show success message
-            alert('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağım.');
-            
-            // Reset form
-            this.reset();
-        });
+        // Form submission - Remove old handler since we're using Formspree
+        // The form will now submit directly to Formspree
 
         // Parallax effect for floating shapes
         window.addEventListener('scroll', function() {
