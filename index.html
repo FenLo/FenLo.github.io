@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Güvenli Password Manager</title>
+    <title>Ömer Faruk Dinç - İngilizce Öğretmeni & Özel Ders Uzmanı</title>
     <style>
         * {
             margin: 0;
@@ -13,876 +13,923 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow-x: hidden;
         }
 
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape1 {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 150px;
+            height: 150px;
+            background: #ff6b6b;
+            top: 60%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .shape3 {
+            width: 80px;
+            height: 80px;
+            background: #4ecdc4;
+            bottom: 20%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Navigation */
+        nav {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            width: 90%;
-            max-width: 900px;
-            min-height: 600px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
 
-        .login-screen {
-            text-align: center;
-            max-width: 400px;
-            margin: 0 auto;
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .logo {
-            font-size: 48px;
-            margin-bottom: 10px;
+        nav ul li {
+            margin: 0 2rem;
         }
 
-        h1 {
+        nav ul li a {
+            text-decoration: none;
             color: #333;
-            margin-bottom: 30px;
             font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+            font-weight: 300;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.6s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.9s both;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-white {
+            background: white;
+        }
+
+        .section-light {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        /* Education Section */
+        .education-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+
+        .education-item {
+            position: relative;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .education-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .education-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .education-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 45%;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .education-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .education-content h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        .education-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .education-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .service-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .form-group {
-            margin-bottom: 25px;
-            text-align: left;
+            margin-bottom: 1.5rem;
         }
 
-        label {
+        .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
         }
 
-        input {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            font-size: 16px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
             transition: border-color 0.3s ease;
         }
 
-        input:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .btn {
+        .submit-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
+            padding: 1rem;
             border: none;
-            border-radius: 12px;
-            font-size: 16px;
+            border-radius: 10px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s ease;
         }
 
-        .btn:hover {
+        .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
 
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
-            margin-top: 15px;
-        }
-
-        .btn-file {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-            margin-top: 10px;
-            font-size: 14px;
-            padding: 10px 15px;
-        }
-
-        .main-screen {
-            display: none;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Footer */
+        footer {
+            background: #333;
             color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action-btn-header {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .export-btn {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .export-btn:hover {
-            background: #45a049;
-        }
-
-        .logout-btn {
-            background: #ff6b6b;
-            color: white;
-        }
-
-        .logout-btn:hover {
-            background: #ff5252;
-        }
-
-        .add-password-section {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
-
-        .password-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .password-form .form-group:last-child {
-            grid-column: 1 / -1;
-        }
-
-        .passwords-list {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .passwords-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            font-weight: 600;
-        }
-
-        .password-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background-color 0.2s ease;
-        }
-
-        .password-item:hover {
-            background-color: #f8f9fa;
-        }
-
-        .password-item:last-child {
-            border-bottom: none;
-        }
-
-        .password-info {
-            flex: 1;
-        }
-
-        .site-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .username {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .password-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action-btn {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-        }
-
-        .copy-btn {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .copy-btn:hover {
-            background: #45a049;
-        }
-
-        .delete-btn {
-            background: #f44336;
-            color: white;
-        }
-
-        .delete-btn:hover {
-            background: #da190b;
-        }
-
-        .empty-state {
             text-align: center;
-            padding: 60px 20px;
-            color: #666;
+            padding: 2rem 0;
         }
 
-        .empty-state .icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            opacity: 0.5;
+        .social-links {
+            margin-top: 1rem;
         }
 
-        .password-strength {
-            margin-top: 10px;
-        }
-
-        .strength-bar {
-            height: 4px;
-            background: #e0e0e0;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .strength-fill {
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease, background-color 0.3s ease;
-        }
-
-        .strength-text {
-            font-size: 12px;
-            margin-top: 5px;
-            font-weight: 500;
-        }
-
-        .generate-btn {
-            background: #9c27b0;
+        .social-links a {
             color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 10px;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
         }
 
-        .generate-btn:hover {
-            background: #7b1fa2;
+        .social-links a:hover {
+            color: #667eea;
+            transform: translateY(-3px);
         }
 
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            display: none;
-            z-index: 1000;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .file-info {
-            background: #e8f4fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #1976d2;
-        }
-
-        .encryption-info {
-            background: #f3e5f5;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #7b1fa2;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                margin: 20px;
+            .hero-content h1 {
+                font-size: 2.5rem;
             }
 
-            .password-form {
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-content {
                 grid-template-columns: 1fr;
             }
 
-            .password-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
+            .education-timeline::before {
+                left: 20px;
             }
 
-            .password-actions {
+            .education-item {
+                flex-direction: column !important;
+                padding-left: 40px;
+            }
+
+            .education-content {
                 width: 100%;
-                justify-content: flex-end;
             }
 
-            .header-actions {
-                flex-direction: column;
-                gap: 5px;
+            .education-year {
+                left: 20px;
+                transform: none;
             }
+        }
+
+        /* Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Giriş Ekranı -->
-        <div id="loginScreen" class="login-screen">
-            <div class="logo">🔐</div>
-            <h1>Güvenli Password Manager</h1>
-            
-            <div class="encryption-info">
-                🔒 Tüm verileriniz AES-256 şifreleme ile korunur
-            </div>
-
-            <div id="setupForm" style="display: none;">
-                <div class="form-group">
-                    <label for="setupPassword">Ana Şifrenizi Oluşturun</label>
-                    <input type="password" id="setupPassword" placeholder="Güçlü bir ana şifre girin (min 8 karakter)">
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Ana Şifreyi Onaylayın</label>
-                    <input type="password" id="confirmPassword" placeholder="Ana şifreyi tekrar girin">
-                </div>
-                <button class="btn" onclick="setupMasterPassword()">Ana Şifreyi Oluştur</button>
-            </div>
-
-            <div id="loginForm">
-                <div class="form-group">
-                    <label for="masterPassword">Ana Şifre</label>
-                    <input type="password" id="masterPassword" placeholder="Ana şifrenizi girin">
-                </div>
-                <button class="btn" onclick="login()">Giriş Yap</button>
-                
-                <div class="form-group">
-                    <label for="importFile">Yedek Dosyasından Geri Yükle</label>
-                    <input type="file" id="importFile" class="file-input" accept=".pwm" onchange="importFromFile()">
-                    <button class="btn btn-file" onclick="document.getElementById('importFile').click()">
-                        📁 Yedek Dosyası Seç
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Ana Ekran -->
-        <div id="mainScreen" class="main-screen">
-            <div class="header">
-                <div class="user-info">
-                    <div class="avatar">👤</div>
-                    <div>
-                        <h2>Hoş Geldiniz</h2>
-                        <p>Şifreleriniz güvenle şifrelendi</p>
-                    </div>
-                </div>
-                <div class="header-actions">
-                    <button class="action-btn-header export-btn" onclick="exportToFile()">📥 Yedek Al</button>
-                    <button class="action-btn-header logout-btn" onclick="logout()">Çıkış Yap</button>
-                </div>
-            </div>
-
-            <div class="add-password-section">
-                <h3>Yeni Şifre Ekle</h3>
-                <form class="password-form" onsubmit="addPassword(event)">
-                    <div class="form-group">
-                        <label for="siteName">Site/Uygulama Adı</label>
-                        <input type="text" id="siteName" required placeholder="Örn: Google, Facebook">
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Kullanıcı Adı/E-posta</label>
-                        <input type="text" id="username" required placeholder="kullanici@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Şifre</label>
-                        <input type="password" id="password" required placeholder="Güçlü bir şifre girin">
-                        <button type="button" class="generate-btn" onclick="generatePassword()">Güçlü Şifre Oluştur</button>
-                        <div class="password-strength">
-                            <div class="strength-bar">
-                                <div class="strength-fill" id="strengthFill"></div>
-                            </div>
-                            <div class="strength-text" id="strengthText"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn">Şifre Ekle</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="passwords-list">
-                <div class="passwords-header">
-                    <h3>Kayıtlı Şifreler (<span id="passwordCount">0</span>)</h3>
-                </div>
-                <div id="passwordsList">
-                    <div class="empty-state">
-                        <div class="icon">🔒</div>
-                        <p>Henüz kayıtlı şifre yok</p>
-                        <p>Yukarıdaki formu kullanarak ilk şifrenizi ekleyin</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="bg-animation">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
     </div>
 
-    <div id="toast" class="toast"></div>
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#home">Ana Sayfa</a></li>
+                <li><a href="#about">Hakkımda</a></li>
+                <li><a href="#education">Eğitim</a></li>
+                <li><a href="#services">Hizmetler</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <script>
-        let passwords = [];
-        let masterPassword = '';
-        let currentSalt = '';
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Ömer Faruk Dinç</h1>
+                <h2>İngilizce Öğretmeni & Özel Ders Uzmanı</h2>
+                <p>Deneyimli ve tutkulu bir İngilizce öğretmeni olarak, öğrencilerimin dil öğrenme yolculuğunda onlara rehberlik ediyorum. Kişiselleştirilmiş öğretim yaklaşımımla her yaştan öğrenciye hizmet veriyorum.</p>
+                <a href="#contact" class="cta-button">Benimle İletişime Geç</a>
+            </div>
+        </div>
+    </section>
 
-        // Basit AES şifreleme fonksiyonları (Web Crypto API ile)
-        async function deriveKey(password, salt) {
-            const encoder = new TextEncoder();
-            const keyMaterial = await crypto.subtle.importKey(
-                'raw',
-                encoder.encode(password),
-                { name: 'PBKDF2' },
-                false,
-                ['deriveKey']
-            );
-            
-            return crypto.subtle.deriveKey(
-                {
-                    name: 'PBKDF2',
-                    salt: encoder.encode(salt),
-                    iterations: 100000,
-                    hash: 'SHA-256'
-                },
-                keyMaterial,
-                { name: 'AES-GCM', length: 256 },
-                false,
-                ['encrypt', 'decrypt']
-            );
-        }
+    <section id="about" class="section-white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Hakkımda</h2>
+            <div class="about-content animate-on-scroll">
+                <div class="about-image">
+                    <div class="profile-image">ÖFD</div>
+                </div>
+                <div class="about-text">
+                    <h3>Merhaba! Ben Ömer Faruk Dinç</h3>
+                    <p>24 yaşındayım ve İngilizce Öğretmenliği mezunuyum. Dil öğretimi konusunda tutkuluyum ve her öğrencinin benzersiz öğrenme stilini anlayarak kişiselleştirilmiş eğitim programları sunuyorum.</p>
+                    <p>Öğretmenlik mesleğini sadece bir iş olarak değil, aynı zamanda insanların hayatlarına dokunma fırsatı olarak görüyorum. Her öğrencimin potansiyelini ortaya çıkarmasına yardımcı olmak için elimden geleni yapıyorum.</p>
+                    <p>Modern öğretim yöntemlerini geleneksel tekniklerle harmanlayarak, öğrencilerimin hem akademik başarılarını artırmalarına hem de İngilizce'yi günlük hayatlarında özgüvenle kullanmalarına yardımcı oluyorum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        async function encryptData(data, password) {
-            const salt = crypto.getRandomValues(new Uint8Array(16));
-            const iv = crypto.getRandomValues(new Uint8Array(12));
-            const key = await deriveKey(password, salt);
-            
-            const encoder = new TextEncoder();
-            const encrypted = await crypto.subtle.encrypt(
-                {
-                    name: 'AES-GCM',
-                    iv: iv
-                },
-                key,
-                encoder.encode(data)
-            );
-            
-            return {
-                salt: Array.from(salt),
-                iv: Array.from(iv),
-                data: Array.from(new Uint8Array(encrypted))
-            };
-        }
-
-        async function decryptData(encryptedObj, password) {
-            const salt = new Uint8Array(encryptedObj.salt);
-            const iv = new Uint8Array(encryptedObj.iv);
-            const data = new Uint8Array(encryptedObj.data);
-            
-            const key = await deriveKey(password, salt);
-            
-            try {
-                const decrypted = await crypto.subtle.decrypt(
-                    {
-                        name: 'AES-GCM',
-                        iv: iv
-                    },
-                    key,
-                    data
-                );
-                
-                const decoder = new TextDecoder();
-                return decoder.decode(decrypted);
-            } catch (e) {
-                throw new Error('Şifre çözme hatası - Yanlış şifre');
-            }
-        }
-
-        // Ana şifre hash'i oluşturma
-        async function hashPassword(password) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password);
-            const hash = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(hash));
-        }
-
-        // Uygulama başlatma
-        window.onload = function() {
-            checkForExistingData();
-        };
-
-        function checkForExistingData() {
-            // Varsayılan olarak kurulum formunu göster
-            document.getElementById('setupForm').style.display = 'block';
-            document.getElementById('loginForm').style.display = 'none';
-        }
-
-        // Ana şifre oluşturma
-        async function setupMasterPassword() {
-            const password = document.getElementById('setupPassword').value;
-            const confirm = document.getElementById('confirmPassword').value;
-
-            if (password.length < 8) {
-                showToast('Ana şifre en az 8 karakter olmalıdır!', 'error');
-                return;
-            }
-
-            if (password !== confirm) {
-                showToast('Şifreler eşleşmiyor!', 'error');
-                return;
-            }
-
-            try {
-                const hashedPassword = await hashPassword(password);
-                const dataToSave = {
-                    masterPasswordHash: hashedPassword,
-                    passwords: [],
-                    salt: Array.from(crypto.getRandomValues(new Uint8Array(16)))
-                };
-
-                const encrypted = await encryptData(JSON.stringify(dataToSave), password);
-                downloadFile('passwords.pwm', JSON.stringify(encrypted));
-                
-                showToast('Ana şifre oluşturuldu! Dosya indirildi.', 'success');
-                
-                document.getElementById('setupForm').style.display = 'none';
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('setupPassword').value = '';
-                document.getElementById('confirmPassword').value = '';
-                
-            } catch (error) {
-                showToast('Şifreleme hatası: ' + error.message, 'error');
-            }
-        }
-
-        // Dosyadan içe aktarma
-        async function importFromFile() {
-            const file = document.getElementById('importFile').files[0];
-            if (!file) return;
-
-            try {
-                const text = await file.text();
-                const encryptedData = JSON.parse(text);
-                
-                // Dosya formatını kontrol et
-                if (!encryptedData.salt || !encryptedData.iv || !encryptedData.data) {
-                    throw new Error('Geçersiz dosya formatı');
-                }
-
-                // Şifre isteme
-                const password = prompt('Ana şifrenizi girin:');
-                if (!password) return;
-
-                const decryptedData = await decryptData(encryptedData, password);
-                const data = JSON.parse(decryptedData);
-                
-                // Şifre doğrulama
-                const enteredHash = await hashPassword(password);
-                const storedHash = data.masterPasswordHash;
-                
-                if (JSON.stringify(enteredHash) !== JSON.stringify(storedHash)) {
-                    throw new Error('Yanlış ana şifre');
-                }
-
-                masterPassword = password;
-                passwords = data.passwords || [];
-                currentSalt = data.salt;
-                
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('mainScreen').style.display = 'block';
-                renderPasswords();
-                
-                showToast('Veriler başarıyla yüklendi!', 'success');
-                
-            } catch (error) {
-                showToast('Dosya yükleme hatası: ' + error.message, 'error');
-            }
-        }
-
-        // Giriş yapma (sadece import için)
-        function login() {
-            showToast('Lütfen yedek dosyanızı seçin', 'error');
-        }
-
-        // Çıkış yapma
-        function logout() {
-            masterPassword = '';
-            passwords = [];
-            currentSalt = '';
-            document.getElementById('loginScreen').style.display = 'block';
-            document.getElementById('mainScreen').style.display = 'none';
-            document.getElementById('setupForm').style.display = 'block';
-            document.getElementById('loginForm').style.display = 'none';
-        }
-
-        // Dosyaya dışa aktarma
-        async function exportToFile() {
-            try {
-                const hashedPassword = await hashPassword(masterPassword);
-                const dataToSave = {
-                    masterPasswordHash: hashedPassword,
-                    passwords: passwords,
-                    salt: currentSalt
-                };
-
-                const encrypted = await encryptData(JSON.stringify(dataToSave), masterPassword);
-                const timestamp = new Date().toISOString().slice(0, 10);
-                downloadFile(`passwords_backup_${timestamp}.pwm`, JSON.stringify(encrypted));
-                
-                showToast('Yedek dosya indirildi!', 'success');
-                
-            } catch (error) {
-                showToast('Dışa aktarma hatası: ' + error.message, 'error');
-            }
-        }
-
-        // Dosya indirme
-        function downloadFile(filename, content) {
-            const blob = new Blob([content], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        // Şifre ekleme
-        async function addPassword(event) {
-            event.preventDefault();
-            
-            const siteName = document.getElementById('siteName').value;
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const newPassword = {
-                id: Date.now(),
-                siteName: siteName,
-                username: username,
-                password: password
-            };
-
-            passwords.push(newPassword);
-            await savePasswords();
-            renderPasswords();
-            
-            // Formu temizle
-            document.getElementById('siteName').value = '';
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('strengthFill').style.width = '0%';
-            document.getElementById('strengthText').textContent = '';
-
-            showToast('Şifre eklendi ve otomatik yedeklendi!', 'success');
-        }
-
-        // Şifreleri kaydetme
-        async function savePasswords() {
-            try {
-                const hashedPassword = await hashPassword(masterPassword);
-                const dataToSave = {
-                    masterPasswordHash: hashedPassword,
-                    passwords: passwords,
-                    salt: currentSalt
-                };
-
-                const encrypted = await encryptData(JSON.stringify(dataToSave), masterPassword);
-                downloadFile('passwords.pwm', JSON.stringify(encrypted));
-                
-            } catch (error) {
-                showToast('Kaydetme hatası: ' + error.message, 'error');
-            }
-        }
-
-        // Şifreleri görüntüleme
-        function renderPasswords() {
-            const passwordsList = document.getElementById('passwordsList');
-            const passwordCount = document.getElementById('passwordCount');
-            
-            passwordCount.textContent = passwords.length;
-
-            if (passwords.length === 0) {
-                passwordsList.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">🔒</div>
-                        <p>Henüz kayıtlı şifre yok</p>
-                        <p>Yukarıdaki formu kullanarak ilk şifrenizi ekleyin</p>
+    <section id="education" class="section-light">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Eğitim Geçmişim</h2>
+            <div class="education-timeline animate-on-scroll">
+                <div class="education-item">
+                    <div class="education-content">
+                        <h4>İngilizce Öğretmenliği Lisans</h4>
+                        <p>Üniversite eğitimi sırasında modern dil öğretim teknikleri, pedagoji ve dil bilimi alanlarında derinlemesine eğitim aldım. Teorik bilgilerimi pratik uygulamalarla pekiştirdim.</p>
                     </div>
-                `;
-                return;
-            }
-
-            passwordsList.innerHTML = passwords.map(pwd => `
-                <div class="password-item">
-                    <div class="password-info">
-                        <div class="site-name">${pwd.siteName}</div>
-                        <div class="username">${pwd.username}</div>
+                    <div class="education-year">2019-2023</div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-content">
+                        <h4>Atatürk Anadolu Lisesi</h4>
+                        <p>Lise eğitimim sırasında İngilizce dil becerilerimi geliştirdim ve öğretmenlik mesleğine olan ilgim bu dönemde şekillenmeye başladı. Çeşitli dil yarışmalarında başarılı sonuçlar elde ettim.</p>
                     </div>
-                    <div class="password-actions">
-                        <button class="action-btn copy-btn" onclick="copyPassword('${pwd.password}')">Kopyala</button>
-                        <button class="action-btn delete-btn" onclick="deletePassword(${pwd.id})">Sil</button>
+                    <div class="education-year">2015-2019</div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-content">
+                        <h4>Sait Faik Abasıyanık Ortaokulu</h4>
+                        <p>Ortaokul yıllarımda temel İngilizce becerilerimi geliştirdim ve dil öğrenmeye olan ilgim bu dönemde başladı. Okul içi ve dışındaki çeşitli etkinliklerde aktif rol aldım.</p>
+                    </div>
+                    <div class="education-year">2012-2015</div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-content">
+                        <h4>Geyve İlkokulu</h4>
+                        <p>Eğitim hayatımın temellerini attığım ilkokul yıllarım. Bu dönemde öğrenmeye olan merakım ve disiplinli çalışma alışkanlıklarım şekillenmeye başladı.</p>
+                    </div>
+                    <div class="education-year">2008-2012</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Hizmetlerim</h2>
+            <div class="services-grid animate-on-scroll">
+                <div class="service-card">
+                    <div class="service-icon">👨‍🏫</div>
+                    <h4>Özel İngilizce Dersleri</h4>
+                    <p>Birebir özel derslerle öğrencilerimin ihtiyaçlarına özel programa göre İngilizce öğretimi. Her seviyeden öğrenci için uygun içerik ve yöntemler.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📚</div>
+                    <h4>Sınav Hazırlığı</h4>
+                    <p>YDS, KPDS, TOEFL, IELTS gibi uluslararası sınavlara hazırlık. Sınav stratejileri ve yoğun pratik ile başarı garantisi.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🗣️</div>
+                    <h4>Konuşma Pratiği</h4>
+                    <p>Günlük konuşma becerilerini geliştirmek isteyen öğrenciler için özel konuşma seansları. Telaffuz düzeltme ve akıcılık çalışmaları.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <h4>İş İngilizcesi</h4>
+                    <p>Profesyonel hayatta İngilizce kullanmak isteyen kişiler için özel İş İngilizcesi eğitimi. Sunum, toplantı ve iş yazışmaları.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">👶</div>
+                    <h4>Çocuk İngilizcesi</h4>
+                    <p>Oyun ve eğlence odaklı öğretim yöntemleriyle çocuklar için özel İngilizce dersleri. Yaratıcı ve etkileşimli öğrenme deneyimi.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📖</div>
+                    <h4>Ödev Yardımı</h4>
+                    <p>Okul ödevlerinde zorlanıan öğrenciler için ödev yardımı ve ders tekrarı. Akademik başarıyı artırmaya yönelik destek.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-light">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">İletişim</h2>
+            <div class="contact-content animate-on-scroll">
+                <div class="contact-info">
+                    <h3 style="margin-bottom: 2rem; color: #667eea;">Benimle İletişime Geçin</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>E-posta</h4>
+                            <p>omerfarukdinc@email.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>Telefon</h4>
+                            <p>+90 5XX XXX XX XX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Konum</h4>
+                            <p>Adapazarı, Sakarya</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">⏰</div>
+                        <div>
+                            <h4>Çalışma Saatleri</h4>
+                            <p>Pazartesi - Cumartesi<br>09:00 - 18:00</p>
+                        </div>
                     </div>
                 </div>
-            `).join('');
-        }
+                
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 2rem; color: #667eea;">Mesaj Gönder</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Ad Soyad</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-posta</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mesajınız</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Mesaj Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Şifre kopyalama
-        function copyPassword(password) {
-            navigator.clipboard.writeText(password).then(() => {
-                showToast('Şifre kopyalandı!', 'success');
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ömer Faruk Dinç. Tüm hakları saklıdır.</p>
+            <div class="social-links">
+                <a href="#" title="LinkedIn">💼</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="Twitter">🐦</a>
+                <a href="#" title="WhatsApp">💬</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animation
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('animated');
+                }
             });
         }
 
-        // Şifre silme
-        async function deletePassword(id) {
-            if (confirm('Bu şifreyi silmek istediğinizden emin misiniz?')) {
-                passwords = passwords.filter(pwd => pwd.id !== id);
-                await savePasswords();
-                renderPasswords();
-                showToast('Şifre silindi ve yedek güncellendi!', 'success');
-            }
-        }
-
-        // Güçlü şifre oluşturma
-        function generatePassword() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
-            let password = '';
-            for (let i = 0; i < 16; i++) {
-                password += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            document.getElementById('password').value = password;
-            checkPasswordStrength(password);
-        }
-
-        // Şifre gücünü kontrol etme
-        document.getElementById('password').addEventListener('input', function() {
-            checkPasswordStrength(this.value);
-        });
-
-        function checkPasswordStrength(password) {
-            const strengthFill = document.getElementById('strengthFill');
-            const strengthText = document.getElementById('strengthText');
+        // Active navigation
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
             
-            let strength = 0;
-            let text = '';
-            let color = '';
-
-            if (password.length >= 8) strength += 20;
-            if (password.length >= 12) strength += 20;
-            if (/[a-z]/.test(password)) strength += 20;
-            if (/[A-Z]/.test(password)) strength += 20;
-            if (/[0-9]/.test(password)) strength += 20;
-            if (/[^A-Za-z0-9]/.test(password)) strength += 20;
-
-            if (strength <= 40) {
-                text = 'Çok Zayıf';
-                color = '#f44336';
-            } else if (strength <= 60) {
-                text = 'Zayıf';
-                color = '#ff9800';
-            } else if (strength <= 80) {
-                text = 'Orta';
-                color = '#2196f3';
-            } else if (strength <= 100) {
-                text = 'Güçlü';
-                color = '#4caf50';
-            } else {
-                text = 'Çok Güçlü';
-                color = '#2e7d32';
-            }
-
-            strengthFill.style.width = Math.min(strength, 100) + '%';
-            strengthFill.style.backgroundColor = color;
-            strengthText.textContent = text;
-            strengthText.style.color = color;
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop <= 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
         }
 
-        // Toast mesajı gösterme
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
-            toast.style.display = 'block';
+        // Form submission
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const message = formData.get('message');
+            
+            // Simple validation
+            if (!name || !email || !message) {
+                alert('Lütfen tüm gerekli alanları doldurun.');
+                return;
+            }
+            
+            // Show success message
+            alert('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağım.');
+            
+            // Reset form
+            this.reset();
+        });
 
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 4000);
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = scrolled * 0.5;
+            
+            document.querySelector('.shape1').style.transform = `translateY(${parallax}px) rotate(${scrolled * 0.1}deg)`;
+            document.querySelector('.shape2').style.transform = `translateY(${parallax * -0.8}px) rotate(${scrolled * -0.1}deg)`;
+            document.querySelector('.shape3').style.transform = `translateY(${parallax * 1.2}px) rotate(${scrolled * 0.15}deg)`;
+            
+            // Update animations and navigation
+            animateOnScroll();
+            updateActiveNav();
+        });
+
+        // Initial load animations
+        window.addEventListener('load', function() {
+            animateOnScroll();
+            updateActiveNav();
+        });
+
+        // Add typing effect to hero title
+        function typeWriter(element, text, speed = 100) {
+            element.innerHTML = '';
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
         }
 
-        // Enter tuşu ile form gönderme
-        document.getElementById('setupPassword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('confirmPassword').focus();
-            }
+        // Start typing effect when page loads
+        setTimeout(() => {
+            const heroTitle = document.querySelector('.hero-content h1');
+            typeWriter(heroTitle, 'Ömer Faruk Dinç', 150);
+        }, 500);
+
+        // Add interactive hover effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
         });
 
-        document.getElementById('confirmPassword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                setupMasterPassword();
+        // Add click ripple effect
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
             }
+
+            button.appendChild(circle);
+        }
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.cta-button, .submit-btn').forEach(button => {
+            button.addEventListener('click', createRipple);
         });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 600ms linear;
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+
+            .cta-button, .submit-btn {
+                position: relative;
+                overflow: hidden;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
