@@ -1,50 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dorksense | Logic for the Illogical</title>
-    
-    <!-- Fonts -->
+    <title>DORKSENSE | İngilizceyi Parçala</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Tailwind (configured inline) -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        'neo-bg': '#FFFAE5',
-                        'neo-main': '#FF4D00', // Intense Orange
-                        'neo-accent': '#A3FF00', // Acid Green
-                        'neo-purple': '#9D00FF',
-                        'neo-black': '#0f0f0f',
-                        'neo-white': '#ffffff',
-                        'neo-blue': '#0047FF'
-                    },
                     fontFamily: {
-                        'display': ['"Syne"', 'sans-serif'],
-                        'body': ['"Space Grotesk"', 'sans-serif'],
-                        'heavy': ['"Archivo Black"', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif'],
+                        'body': ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'neo-bg': '#f0f0f0',
+                        'neo-yellow': '#FFE800',
+                        'neo-pink': '#FF90E8',
+                        'neo-blue': '#23A6F0',
+                        'neo-green': '#4ADE80',
+                        'neo-black': '#1a1a1a',
+                        'neo-orange': '#FF5C00'
                     },
                     boxShadow: {
-                        'neo': '8px 8px 0px 0px #0f0f0f',
-                        'neo-sm': '4px 4px 0px 0px #0f0f0f',
-                        'neo-lg': '12px 12px 0px 0px #0f0f0f',
-                        'neo-hover': '12px 12px 0px 0px #0f0f0f',
-                        'neo-active': '2px 2px 0px 0px #0f0f0f',
-                    },
-                    spacing: {
-                        '128': '32rem',
-                    },
-                    cursor: {
-                        'none': 'none',
+                        'hard': '5px 5px 0px 0px #1a1a1a',
+                        'hard-hover': '2px 2px 0px 0px #1a1a1a',
+                        'hard-xl': '10px 10px 0px 0px #1a1a1a',
                     }
                 }
             }
@@ -52,536 +37,360 @@
     </script>
 
     <style>
-        /* Base Setup */
-        body {
-            background-color: #FFFAE5;
-            color: #0f0f0f;
-            overflow-x: hidden;
-            cursor: none; /* Custom cursor handling */
-        }
-
-        ::selection {
-            background-color: #0f0f0f;
-            color: #A3FF00;
-        }
-
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 16px;
+            width: 15px;
         }
         ::-webkit-scrollbar-track {
-            background: #FFFAE5;
-            border-left: 3px solid #0f0f0f;
+            background: #f0f0f0;
+            border-left: 3px solid #1a1a1a;
         }
         ::-webkit-scrollbar-thumb {
-            background: #0f0f0f;
-            border: 3px solid #FFFAE5;
+            background: #FF5C00;
+            border: 3px solid #1a1a1a;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #FF4D00;
+            background: #1a1a1a;
         }
 
-        /* Utilities */
-        .text-outline {
-            -webkit-text-stroke: 2px #0f0f0f;
-            color: transparent;
-        }
-        
-        .text-outline-white {
-            -webkit-text-stroke: 2px #ffffff;
-            color: transparent;
+        body {
+            cursor: crosshair;
+            overflow-x: hidden;
         }
 
-        .clip-corner {
-            clip-path: polygon(
-                0 0, 
-                100% 0, 
-                100% calc(100% - 20px), 
-                calc(100% - 20px) 100%, 
-                0 100%
-            );
-        }
-
-        .grain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            z-index: 9998;
-        }
-
-        /* Marquee Animation */
         .marquee-container {
             overflow: hidden;
             white-space: nowrap;
         }
+        
         .marquee-content {
             display: inline-block;
             animation: marquee 20s linear infinite;
         }
+
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        /* Cursor */
-        #cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 24px;
-            height: 24px;
-            background-color: #0f0f0f;
-            border-radius: 0%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-            mix-blend-mode: difference;
+        /* Smooth Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px) rotate(2deg);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
         
-        /* Loader */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #0f0f0f;
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) rotate(0);
         }
-        .loader-bar {
-            width: 20px;
-            height: 0%;
-            background: #A3FF00;
-            margin: 0 5px;
+
+        /* Button Push Effect */
+        .btn-push {
+            transition: all 0.1s ease;
+        }
+        .btn-push:active {
+            transform: translate(5px, 5px);
+            box-shadow: 0px 0px 0px 0px #1a1a1a;
+        }
+
+        /* Glitch text effect on hover */
+        .glitch-hover:hover {
+            animation: shake 0.5s;
+            color: #FF5C00;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .grid-bg {
+            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 20px 20px;
         }
     </style>
 </head>
-<body class="font-body">
-
-    <!-- Grain Overlay -->
-    <div class="grain"></div>
-
-    <!-- Custom Cursor -->
-    <div id="cursor"></div>
-
-    <!-- Loader -->
-    <div id="loader">
-        <div class="flex gap-2 h-32 items-end">
-            <div class="loader-bar"></div>
-            <div class="loader-bar"></div>
-            <div class="loader-bar"></div>
-            <div class="loader-bar"></div>
-            <div class="loader-bar"></div>
-        </div>
-        <h1 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-neo-bg font-display font-bold text-6xl mix-blend-exclusion">LOADING</h1>
-    </div>
+<body class="bg-neo-bg font-body text-neo-black selection:bg-neo-pink selection:text-white">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full flex justify-between items-center p-4 md:p-8 z-50 pointer-events-none mix-blend-difference text-[#FFFAE5]">
-        <div class="pointer-events-auto group cursor-none">
-            <span class="font-heavy text-3xl md:text-4xl tracking-tighter hover:text-neo-accent transition-colors">DORKSENSE.</span>
-        </div>
-        <div class="pointer-events-auto hidden md:flex gap-8 font-bold text-lg">
-            <a href="#about" class="hover:line-through decoration-4 decoration-neo-accent">MANIFESTO</a>
-            <a href="#work" class="hover:line-through decoration-4 decoration-neo-accent">CHAOS</a>
-            <a href="#contact" class="border-2 border-[#FFFAE5] px-6 py-2 hover:bg-[#FFFAE5] hover:text-black transition-all duration-300 shadow-none hover:shadow-[4px_4px_0px_0px_#A3FF00]">TALK</a>
-        </div>
-        <!-- Mobile Menu Button (Visual Only for Demo) -->
-        <div class="pointer-events-auto md:hidden border-2 border-[#FFFAE5] p-2">
-            <i data-lucide="menu" class="w-6 h-6"></i>
+    <nav class="fixed w-full top-0 z-50 border-b-4 border-neo-black bg-white">
+        <div class="flex justify-between items-center h-20 px-4 md:px-8 max-w-8xl mx-auto">
+            <div class="text-3xl md:text-4xl font-display font-black tracking-tighter glitch-hover cursor-pointer uppercase">
+                DORKSENSE.
+            </div>
+            
+            <div class="hidden md:flex space-x-8 font-bold text-lg">
+                <a href="#method" class="hover:underline decoration-4 decoration-neo-pink underline-offset-4">METOD</a>
+                <a href="#mentors" class="hover:underline decoration-4 decoration-neo-yellow underline-offset-4">MENTORLAR</a>
+                <a href="#pricing" class="hover:underline decoration-4 decoration-neo-green underline-offset-4">FİYATLAR</a>
+            </div>
+
+            <button class="hidden md:block bg-neo-black text-white px-6 py-2 font-bold border-2 border-transparent hover:bg-white hover:text-neo-black hover:border-neo-black transition-colors shadow-hard hover:shadow-hard-hover btn-push">
+                GİRİŞ YAP
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden bg-neo-yellow border-2 border-neo-black p-2 cursor-pointer shadow-hard btn-push" onclick="toggleMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </div>
         </div>
     </nav>
 
-    <main id="smooth-wrapper">
-        <div id="smooth-content">
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-neo-yellow z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center space-y-8 border-l-4 border-neo-black">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 bg-white border-2 border-neo-black p-2 shadow-hard">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <a href="#method" onclick="toggleMobileMenu()" class="text-4xl font-display font-black border-b-4 border-neo-black hover:text-white transition-colors">METOD</a>
+        <a href="#mentors" onclick="toggleMobileMenu()" class="text-4xl font-display font-black border-b-4 border-neo-black hover:text-white transition-colors">MENTORLAR</a>
+        <a href="#pricing" onclick="toggleMobileMenu()" class="text-4xl font-display font-black border-b-4 border-neo-black hover:text-white transition-colors">FİYATLAR</a>
+    </div>
 
-            <!-- HERO SECTION -->
-            <section class="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden border-b-4 border-black bg-neo-bg">
-                
-                <!-- Floating Elements -->
-                <div class="absolute top-1/4 left-10 w-24 h-24 md:w-48 md:h-48 border-4 border-black bg-neo-main rounded-full shadow-neo float-anim opacity-80"></div>
-                <div class="absolute bottom-1/4 right-10 w-32 h-32 md:w-64 md:h-64 border-4 border-black bg-neo-purple rotate-12 shadow-neo float-anim-reverse z-10"></div>
-                <div class="absolute top-1/2 right-1/4 w-16 h-16 border-4 border-black bg-neo-accent shadow-neo-sm"></div>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-12 min-h-screen flex items-center relative overflow-hidden grid-bg">
+        <!-- Decorative Blobs -->
+        <div class="absolute top-40 right-[-50px] w-64 h-64 bg-neo-pink rounded-full border-4 border-neo-black mix-blend-multiply animate-bounce hidden md:block"></div>
+        <div class="absolute bottom-20 left-[-50px] w-48 h-48 bg-neo-blue rotate-45 border-4 border-neo-black shadow-hard hidden md:block"></div>
 
-                <div class="relative z-20 text-center mix-blend-normal">
-                    <div class="overflow-hidden">
-                        <h1 class="hero-text font-display font-bold text-[12vw] leading-[0.85] tracking-tighter text-black">
-                            WE MAKE
-                        </h1>
-                    </div>
-                    <div class="overflow-hidden">
-                        <h1 class="hero-text font-display font-bold text-[12vw] leading-[0.85] tracking-tighter text-neo-blue text-outline">
-                            DIGITAL
-                        </h1>
-                    </div>
-                    <div class="overflow-hidden">
-                        <h1 class="hero-text font-display font-bold text-[12vw] leading-[0.85] tracking-tighter text-black">
-                            NOISE.
-                        </h1>
-                    </div>
-                    
-                    <p class="hero-sub mt-8 font-body text-xl md:text-2xl font-bold max-w-md mx-auto bg-white border-4 border-black p-4 shadow-neo rotate-2">
-                        Anti-boring web experiences for brands that hate playing it safe.
-                    </p>
+        <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="reveal">
+                <div class="inline-block bg-neo-yellow border-2 border-neo-black px-4 py-1 mb-4 font-bold text-sm tracking-widest shadow-hard transform -rotate-2">
+                    ARTIK BAHANE YOK
                 </div>
-
-                <!-- Scroll Indicator -->
-                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-                    <i data-lucide="arrow-down" class="w-12 h-12 text-black stroke-[3]"></i>
-                </div>
-            </section>
-
-            <!-- MARQUEE -->
-            <div class="w-full bg-neo-accent border-b-4 border-black py-6 overflow-hidden flex items-center transform -skew-y-2 origin-left mt-[-4px] z-30 relative">
-                <div class="marquee-container font-heavy text-4xl md:text-6xl text-black uppercase tracking-widest">
-                    <div class="marquee-content">
-                        /// NO TEMPLATES ALLOWED /// BRUTAL SIMPLICITY /// PIXEL PERFECTION IS DEAD /// LONG LIVE THE GLITCH /// DESIGN IS CHAOS /// 
-                        /// NO TEMPLATES ALLOWED /// BRUTAL SIMPLICITY /// PIXEL PERFECTION IS DEAD /// LONG LIVE THE GLITCH /// DESIGN IS CHAOS /// 
-                    </div>
+                <h1 class="text-6xl md:text-8xl font-display font-black leading-[0.9] mb-6 drop-shadow-lg">
+                    İNGİLİZCEYİ<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-neo-orange to-neo-pink" style="-webkit-text-stroke: 3px #1a1a1a;">PARÇALA.</span>
+                </h1>
+                <p class="text-xl font-bold mb-8 max-w-lg bg-white border-2 border-neo-black p-4 shadow-hard rotate-1">
+                    Sıkıcı gramer kitaplarını yak. Robot gibi konuşmayı bırak. Dorksense ile sokağın, işin ve internetin dilini öğren.
+                </p>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <button class="bg-neo-pink text-neo-black text-xl font-black py-4 px-8 border-4 border-neo-black shadow-hard hover:shadow-hard-hover hover:translate-x-1 hover:translate-y-1 transition-all btn-push">
+                        HEMEN BAŞLA 🚀
+                    </button>
+                    <button class="bg-white text-neo-black text-xl font-black py-4 px-8 border-4 border-neo-black shadow-hard hover:bg-neo-blue hover:text-white transition-all btn-push">
+                        NASIL ÇALIŞIR?
+                    </button>
                 </div>
             </div>
 
-            <!-- MANIFESTO SECTION -->
-            <section id="about" class="relative py-32 px-4 md:px-12 bg-neo-black text-neo-bg overflow-hidden">
-                <div class="absolute top-0 right-0 w-1/2 h-full bg-neo-purple opacity-20 clip-polygon"></div>
-                
-                <div class="container mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 relative z-10">
-                    <div class="md:col-span-5">
-                        <div class="sticky top-32">
-                            <h2 class="font-heavy text-6xl md:text-8xl mb-6 text-neo-accent">THE<br>MANIFESTO</h2>
-                            <div class="w-full h-4 bg-neo-main border-2 border-white shadow-[4px_4px_0px_0px_#ffffff]"></div>
-                        </div>
+            <div class="relative reveal delay-100">
+                <div class="bg-white border-4 border-neo-black p-2 shadow-hard-xl rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <div class="bg-neo-black aspect-video flex items-center justify-center overflow-hidden relative group">
+                         <!-- Mock Video/Image Area -->
+                         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500"></div>
+                         <div class="absolute inset-0 bg-neo-pink opacity-20 mix-blend-overlay"></div>
+                         <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center border-4 border-neo-black cursor-pointer z-10 group-hover:scale-110 transition-transform">
+                            <div class="w-0 h-0 border-t-[15px] border-t-transparent border-l-[25px] border-l-neo-black border-b-[15px] border-b-transparent ml-2"></div>
+                         </div>
                     </div>
-                    
-                    <div class="md:col-span-7 space-y-12 text-xl md:text-3xl font-bold leading-snug">
-                        <p class="manifesto-text opacity-20">
-                            We believe the internet has become a sterile hospital hallway. Everything is round, soft, and safe. <span class="text-neo-main bg-white px-2">We are the sledgehammer.</span>
-                        </p>
-                        <p class="manifesto-text opacity-20">
-                            Dorksense isn't about making sense. It's about making feelings. We utilize raw aesthetics to trigger dopamine receptors you didn't know you had.
-                        </p>
-                        <p class="manifesto-text opacity-20">
-                            Ugly is the new beautiful. Wrong is the new right. If your website doesn't look like it might crash the browser, you aren't trying hard enough.
-                        </p>
-
-                        <!-- Stats Box -->
-                        <div class="grid grid-cols-2 gap-4 mt-12">
-                            <div class="bg-neo-bg text-black border-4 border-white p-6 shadow-[8px_8px_0px_0px_#A3FF00] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all cursor-none stats-card">
-                                <h3 class="font-heavy text-5xl">99%</h3>
-                                <p class="text-sm font-mono uppercase mt-2">Chaos Factor</p>
-                            </div>
-                            <div class="bg-neo-main text-white border-4 border-white p-6 shadow-[8px_8px_0px_0px_#9D00FF] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all cursor-none stats-card">
-                                <h3 class="font-heavy text-5xl">0%</h3>
-                                <p class="text-sm font-mono uppercase mt-2">Subtlety</p>
-                            </div>
-                        </div>
+                    <div class="p-4 flex justify-between items-center">
+                        <span class="font-bold text-xl">DERS #01: KORKULARIN</span>
+                        <span class="bg-neo-green border-2 border-neo-black px-2 font-bold text-xs">CANLI</span>
                     </div>
                 </div>
-            </section>
-
-            <!-- SERVICES / GRID SECTION -->
-            <section class="py-20 bg-neo-blue border-t-4 border-black">
-                <div class="container mx-auto px-4">
-                    <div class="flex justify-between items-end mb-16 border-b-4 border-black pb-4">
-                        <h2 class="font-heavy text-5xl md:text-7xl text-white">OUR TOOLKIT</h2>
-                        <i data-lucide="wrench" class="w-12 h-12 text-neo-accent stroke-[3] animate-spin-slow"></i>
-                    </div>
-
-                    <!-- Bento Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 auto-rows-[300px]">
-                        
-                        <!-- Card 1 -->
-                        <div class="service-card bg-neo-bg border-4 border-black shadow-neo p-8 flex flex-col justify-between md:col-span-2 hover:bg-neo-accent transition-colors duration-300 group">
-                            <div class="flex justify-between items-start">
-                                <h3 class="font-heavy text-4xl uppercase">Web<br>Brutalism</h3>
-                                <i data-lucide="layout-grid" class="w-10 h-10 stroke-[3] group-hover:rotate-90 transition-transform duration-500"></i>
-                            </div>
-                            <p class="font-bold text-lg mt-4 border-t-2 border-black pt-4">
-                                Creating layouts that defy grid systems and user expectations.
-                            </p>
-                        </div>
-
-                        <!-- Card 2 -->
-                        <div class="service-card bg-neo-main border-4 border-black shadow-neo p-8 flex flex-col justify-center items-center text-center rotate-1 hover:rotate-0 transition-transform duration-300">
-                            <i data-lucide="zap" class="w-20 h-20 text-black fill-white mb-4 stroke-[3]"></i>
-                            <h3 class="font-display font-bold text-2xl text-white">HIGH VOLTAGE<br>DEVELOPMENT</h3>
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="service-card bg-neo-black border-4 border-black shadow-neo p-8 flex flex-col justify-between text-white hover:shadow-none hover:translate-x-[8px] hover:translate-y-[8px] transition-all">
-                            <h3 class="font-heavy text-3xl text-neo-purple">MOTION<br>DESIGN</h3>
-                            <p class="text-gray-400">Things moving when they shouldn't.</p>
-                        </div>
-
-                        <!-- Card 4 -->
-                        <div class="service-card bg-white border-4 border-black shadow-neo p-0 overflow-hidden md:col-span-2 relative group">
-                            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop')] bg-cover bg-center filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"></div>
-                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <h3 class="font-heavy text-5xl text-white -rotate-6">VISUAL CHAOS</h3>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <!-- INTERACTIVE SECTION -->
-            <section class="py-32 bg-neo-bg flex flex-col items-center justify-center text-center overflow-hidden relative">
-                <div class="absolute inset-0 grid grid-cols-[repeat(20,1fr)] grid-rows-[repeat(20,1fr)] opacity-10 pointer-events-none">
-                    <!-- Generated grid lines via JS later or simple CSS -->
-                </div>
-                
-                <h2 class="font-display font-bold text-4xl md:text-6xl mb-12 z-10">ARE YOU BRAVE?</h2>
-                
-                <button id="danger-btn" class="relative group">
-                    <div class="absolute inset-0 bg-black translate-x-4 translate-y-4 transition-transform group-hover:translate-x-6 group-hover:translate-y-6"></div>
-                    <div class="relative border-4 border-black bg-neo-main px-12 py-8 font-heavy text-4xl md:text-6xl text-white hover:-translate-y-2 hover:-translate-x-2 active:translate-x-2 active:translate-y-2 transition-transform duration-100 flex items-center gap-4">
-                        <i data-lucide="skull" class="w-12 h-12 stroke-[3]"></i>
-                        DO NOT CLICK
-                    </div>
-                </button>
-
-                <div id="confetti-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
-            </section>
-
-            <!-- FOOTER -->
-            <footer class="bg-black text-neo-bg pt-20 pb-10 px-4 border-t-8 border-neo-accent">
-                <div class="container mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <div>
-                            <h1 class="font-heavy text-[15vw] md:text-[10vw] leading-none text-neo-bg select-none">DORK.</h1>
-                        </div>
-                        <div class="flex flex-col justify-end items-start md:items-end space-y-6">
-                            <a href="#" class="text-4xl font-display hover:text-neo-accent hover:ml-4 transition-all">INSTAGRAM -></a>
-                            <a href="#" class="text-4xl font-display hover:text-neo-accent hover:ml-4 transition-all">TWITTER -></a>
-                            <a href="#" class="text-4xl font-display hover:text-neo-accent hover:ml-4 transition-all">GITHUB -></a>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-20 pt-10 border-t-2 border-white/20 flex flex-col md:flex-row justify-between items-center text-sm font-mono">
-                        <p>© 2025 DORKSENSE INDUSTRIES. ALL RIGHTS RESERVED.</p>
-                        <p class="mt-4 md:mt-0">MADE WITH <span class="text-neo-main">♥</span> AND TOO MUCH CAFFEINE.</p>
-                    </div>
-                </div>
-            </footer>
-
+            </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.0.29/dist/lenis.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Marquee Section -->
+    <div class="border-y-4 border-neo-black bg-neo-yellow py-4 overflow-hidden transform -rotate-1 scale-105 z-20 relative">
+        <div class="marquee-container">
+            <div class="marquee-content font-display font-black text-4xl md:text-6xl">
+                ⚠️ GRAMER EZBERLEME ⚠️ AKICI KONUŞ ⚠️ HATA YAPMAKTAN KORKMA ⚠️ NETFLIX'İ ALTYAZISIZ İZLE ⚠️ MÜLAKATLARDA TERLEME ⚠️ GRAMER EZBERLEME ⚠️ AKICI KONUŞ ⚠️ HATA YAPMAKTAN KORKMA ⚠️ NETFLIX'İ ALTYAZISIZ İZLE ⚠️
+            </div>
+        </div>
+    </div>
+
+    <!-- Methodology Grid -->
+    <section id="method" class="py-20 px-4 bg-white border-b-4 border-neo-black">
+        <div class="container mx-auto">
+            <h2 class="text-5xl md:text-7xl font-display font-black mb-16 text-center reveal">
+                <span class="bg-neo-black text-white px-4 transform -skew-x-6 inline-block">BİZİM</span> TARZIMIZ
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-neo-bg border-4 border-neo-black p-8 shadow-hard hover:shadow-hard-xl hover:-translate-y-2 transition-all reveal group">
+                    <div class="w-16 h-16 bg-neo-orange border-4 border-neo-black rounded-none mb-6 flex items-center justify-center text-3xl group-hover:rotate-12 transition-transform">
+                        🎤
+                    </div>
+                    <h3 class="text-3xl font-black mb-4">SADECE KONUŞ</h3>
+                    <p class="font-medium text-lg border-l-4 border-neo-black pl-4">
+                        Boşluk doldurmaca yok. İlk günden itibaren mikrofonun açık. Saçmala, takıl ama susma.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-neo-pink border-4 border-neo-black p-8 shadow-hard hover:shadow-hard-xl hover:-translate-y-2 transition-all reveal delay-100 group">
+                    <div class="w-16 h-16 bg-white border-4 border-neo-black rounded-none mb-6 flex items-center justify-center text-3xl group-hover:-rotate-12 transition-transform">
+                        🧠
+                    </div>
+                    <h3 class="text-3xl font-black mb-4">KÜLTÜRÜ KAP</h3>
+                    <p class="font-medium text-lg border-l-4 border-neo-black pl-4">
+                        Dil sadece kelime değildir. Meme kültürü, slang, deyimler ve sokak ağzı burada.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-neo-blue border-4 border-neo-black p-8 shadow-hard hover:shadow-hard-xl hover:-translate-y-2 transition-all reveal delay-200 group text-white">
+                    <div class="w-16 h-16 bg-neo-yellow border-4 border-neo-black rounded-none mb-6 flex items-center justify-center text-3xl group-hover:rotate-180 transition-transform">
+                        ⚡
+                    </div>
+                    <h3 class="text-3xl font-black mb-4 text-white" style="-webkit-text-stroke: 2px black;">HIZLI GERİ BİLDİRİM</h3>
+                    <p class="font-medium text-lg border-l-4 border-white pl-4 text-neo-black">
+                        Yapay zeka destekli analizler ve gerçek hoca yorumları. Nerede batırdığını anında gör.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Plans -->
+    <section id="pricing" class="py-20 px-4 grid-bg">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-5xl md:text-6xl font-display font-black bg-white border-4 border-neo-black inline-block px-6 py-2 shadow-hard transform rotate-1">
+                    NE KADAR?
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                
+                <!-- Plan 1 -->
+                <div class="bg-white border-4 border-neo-black p-8 relative shadow-hard reveal">
+                    <h3 class="text-3xl font-black mb-2">AYLAK (Starter)</h3>
+                    <p class="text-gray-600 font-bold mb-6">Haftada 2 Gün</p>
+                    <div class="text-5xl font-black mb-8">₺1500<span class="text-xl font-normal">/ay</span></div>
+                    <ul class="space-y-4 mb-8 font-bold">
+                        <li class="flex items-center"><span class="bg-neo-green w-6 h-6 border-2 border-neo-black mr-3 flex items-center justify-center">✓</span> Grup Dersleri</li>
+                        <li class="flex items-center"><span class="bg-neo-green w-6 h-6 border-2 border-neo-black mr-3 flex items-center justify-center">✓</span> Video Arşivi</li>
+                        <li class="flex items-center opacity-50 line-through"><span class="bg-gray-300 w-6 h-6 border-2 border-neo-black mr-3 flex items-center justify-center">X</span> Birebir Mentorluk</li>
+                    </ul>
+                    <button class="w-full bg-white text-neo-black font-black border-4 border-neo-black py-3 hover:bg-neo-black hover:text-white transition-colors">SEÇ</button>
+                </div>
+
+                <!-- Plan 2 (Featured) -->
+                <div class="bg-neo-yellow border-4 border-neo-black p-8 relative shadow-hard-xl transform md:-rotate-2 scale-105 z-10 reveal delay-100">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-neo-pink text-white font-black border-4 border-neo-black px-4 py-1 shadow-hard-hover">
+                        EN POPÜLER
+                    </div>
+                    <h3 class="text-4xl font-black mb-2">MANYAK (Pro)</h3>
+                    <p class="text-neo-black font-bold mb-6">Sınırsız Erişim</p>
+                    <div class="text-6xl font-black mb-8">₺3000<span class="text-xl font-normal">/ay</span></div>
+                    <ul class="space-y-4 mb-8 font-bold">
+                        <li class="flex items-center"><span class="bg-white w-6 h-6 border-2 border-neo-black mr-3 flex items-center justify-center">✓</span> Sınırsız Konuşma Kulübü</li>
+                        <li class="flex items-center"><span class="bg-white w-6 h-6 border-2 border-neo-black mr-3 flex items-center justify-center">✓</span> 7/24 AI Koç</li>
+                        <li class="flex items-center"><span class="bg-white w-6 h-6 border-2 border-neo-black mr-3 flex items-center justify-center">✓</span> Haftada 1 Birebir</li>
+                        <li class="flex items-center"><span class="bg-white w-6 h-6 border-2 border-neo-black mr-3 flex items-center justify-center">✓</span> Sertifika</li>
+                    </ul>
+                    <button class="w-full bg-neo-black text-white font-black border-4 border-transparent py-4 hover:bg-white hover:text-neo-black hover:border-neo-black hover:shadow-hard transition-all btn-push">
+                        SATIN AL VE DELİR
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Big CTA -->
+    <section class="py-24 bg-neo-black text-white border-t-4 border-neo-black overflow-hidden relative">
+        <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background-image: repeating-linear-gradient(45deg, #333 0, #333 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
+        
+        <div class="container mx-auto text-center relative z-10 px-4 reveal">
+            <h2 class="text-5xl md:text-8xl font-display font-black mb-8 leading-tight">
+                HALA BURADA MISIN?
+            </h2>
+            <p class="text-xl md:text-2xl font-mono mb-12 text-neo-green">
+                &lt;div class="excuse"&gt; Bahanelerin bitti. &lt;/div&gt;
+            </p>
+            <form class="max-w-xl mx-auto flex flex-col md:flex-row gap-4">
+                <input type="email" placeholder="E-POSTANI YAZ" class="flex-1 p-4 bg-white text-neo-black font-bold border-4 border-white focus:border-neo-pink focus:outline-none shadow-hard text-lg">
+                <button type="button" class="bg-neo-green text-neo-black font-black px-8 py-4 border-4 border-white hover:bg-neo-pink hover:border-neo-pink transition-colors shadow-hard btn-push text-lg whitespace-nowrap">
+                    KAYDOL
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t-4 border-neo-black pt-16 pb-8 px-4">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2">
+                    <div class="text-4xl font-display font-black mb-6">DORKSENSE.</div>
+                    <p class="font-bold max-w-xs">
+                        Sıkıcı İngilizce eğitimine başkaldıranların buluşma noktası. İstanbul'dan dünyaya.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-black text-xl mb-6 border-b-4 border-neo-pink inline-block">LİNKLER</h4>
+                    <ul class="space-y-2 font-bold">
+                        <li><a href="#" class="hover:text-neo-blue hover:translate-x-2 inline-block transition-transform">Manifesto</a></li>
+                        <li><a href="#" class="hover:text-neo-blue hover:translate-x-2 inline-block transition-transform">SSS</a></li>
+                        <li><a href="#" class="hover:text-neo-blue hover:translate-x-2 inline-block transition-transform">Kariyer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-black text-xl mb-6 border-b-4 border-neo-blue inline-block">SOSYAL</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-neo-black text-white flex items-center justify-center border-2 border-transparent hover:bg-white hover:text-neo-black hover:border-neo-black transition-all">IG</a>
+                        <a href="#" class="w-10 h-10 bg-neo-black text-white flex items-center justify-center border-2 border-transparent hover:bg-white hover:text-neo-black hover:border-neo-black transition-all">TW</a>
+                        <a href="#" class="w-10 h-10 bg-neo-black text-white flex items-center justify-center border-2 border-transparent hover:bg-white hover:text-neo-black hover:border-neo-black transition-all">YT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center font-bold text-sm opacity-50 border-t-2 border-gray-200 pt-8">
+                © 2025 DORKSENSE. TÜM HAKLARI SAKLIDIR, AMA ÇALARSAN DA CANIN SAĞOLSUN.
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // --- 1. Preloader Logic ---
-        const tlLoader = gsap.timeline();
-
-        tlLoader.to(".loader-bar", {
-            height: "100%",
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "power4.inOut"
-        })
-        .to("#loader h1", {
-            opacity: 0,
-            duration: 0.2
-        })
-        .to("#loader", {
-            y: "-100%",
-            duration: 0.8,
-            ease: "power4.inOut"
-        }, "-=0.2")
-        .from(".hero-text", {
-            y: 200,
-            opacity: 0,
-            rotate: 5,
-            stagger: 0.1,
-            duration: 1,
-            ease: "power3.out"
-        }, "-=0.5");
-
-        // --- 2. Smooth Scroll Setup (Lenis) ---
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+            } else {
+                menu.classList.add('translate-x-full');
+            }
         }
-        requestAnimationFrame(raf);
 
-        // Connect Lenis to GSAP ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // --- 3. GSAP Animations ---
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
 
-        // Floating elements parallax
-        gsap.to(".float-anim", {
-            y: -100,
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1
-            }
-        });
-        gsap.to(".float-anim-reverse", {
-            y: 150,
-            rotate: 45,
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.5
-            }
-        });
-
-        // Manifesto Text Reveal
-        const manifestoTexts = document.querySelectorAll(".manifesto-text");
-        manifestoTexts.forEach(text => {
-            gsap.to(text, {
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: text,
-                    start: "top 80%",
-                    end: "top 40%",
-                    scrub: true
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
                 }
             });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
         });
-
-        // Stats Cards Hover Effect (Magnetic-ish via GSAP)
-        document.querySelectorAll('.stats-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                gsap.to(card, {
-                    x: (x - rect.width / 2) / 5,
-                    y: (y - rect.height / 2) / 5,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.5,
-                    ease: "elastic.out(1, 0.5)"
-                });
-            });
-        });
-
-        // Service Cards Stagger Entry
-        gsap.from(".service-card", {
-            y: 100,
-            opacity: 0,
-            rotate: 5,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-                trigger: ".service-card",
-                start: "top 85%"
-            }
-        });
-
-        // --- 4. Custom Cursor Logic ---
-        const cursor = document.getElementById('cursor');
-        const links = document.querySelectorAll('a, button, .service-card');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        // Hover effects for cursor
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursor.style.width = '60px';
-                cursor.style.height = '60px';
-                cursor.style.backgroundColor = '#A3FF00'; // Neo accent
-                cursor.style.mixBlendMode = 'exclusion';
-            });
-            link.addEventListener('mouseleave', () => {
-                cursor.style.width = '24px';
-                cursor.style.height = '24px';
-                cursor.style.backgroundColor = '#0f0f0f';
-                cursor.style.mixBlendMode = 'difference';
-            });
-        });
-
-        // --- 5. Button Interaction (Confetti) ---
-        const dangerBtn = document.getElementById('danger-btn');
-        
-        dangerBtn.addEventListener('click', () => {
-            // Shake Screen
-            gsap.to("body", {
-                x: -10,
-                duration: 0.1,
-                yoyo: true,
-                repeat: 5
-            });
-
-            // Confetti Explosion
-            var duration = 2 * 1000;
-            var end = Date.now() + duration;
-
-            (function frame() {
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#FF4D00', '#A3FF00', '#9D00FF']
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#FF4D00', '#A3FF00', '#9D00FF']
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
-
-            // Change text temporarily
-            const originalContent = dangerBtn.innerHTML;
-            dangerBtn.innerHTML = '<div class="relative border-4 border-black bg-neo-black px-12 py-8 font-heavy text-4xl md:text-6xl text-white flex items-center gap-4">OH NO!</div>';
-            
-            setTimeout(() => {
-                dangerBtn.innerHTML = originalContent;
-                lucide.createIcons(); // Re-init icons
-            }, 3000);
-        });
-
     </script>
 </body>
 </html>
